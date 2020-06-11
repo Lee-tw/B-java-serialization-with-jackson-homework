@@ -1,9 +1,16 @@
 package com.thoughtworks.capability.gtb.vo;
 
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.thoughtworks.capability.gtb.serializer.DateDeserializer;
+import com.thoughtworks.capability.gtb.serializer.DateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 /**
  * @author itutry
@@ -14,9 +21,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EventVo {
 
-  private String id;
-  private String name;
-  private EventType type;
-  private LocalDateTime time;
-  private UserVo user;
+    private String id;
+    private String name;
+    private EventType type;
+
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
+    private LocalDateTime time;
+
+    @JsonUnwrapped
+    private UserVo user;
 }
