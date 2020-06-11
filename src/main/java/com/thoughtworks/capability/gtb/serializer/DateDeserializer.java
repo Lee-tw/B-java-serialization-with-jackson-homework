@@ -19,7 +19,6 @@ public class DateDeserializer extends StdDeserializer<LocalDateTime> {
     @Override
     public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         Instant instant = Instant.ofEpochMilli(p.getLongValue());
-        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.of("+8"));
-        return dateTime;
+        return LocalDateTime.ofInstant(instant, ZoneId.of("+8"));
     }
 }
